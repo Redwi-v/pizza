@@ -18,7 +18,6 @@ const categoriesArray: String[] = [
 const Categories: FunctionComponent<CategoriesProps> = () => {
 
   const [activeCategory, setActiveCategory] = React.useState<number>(0)
-  console.log(activeCategory)
 
 
   return (

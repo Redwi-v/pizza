@@ -1,0 +1,64 @@
+.sort {
+  position: relative;
+
+  .sort_button {
+    background: none;
+    border: none;
+    color: inherit;
+    padding: 0;
+    cursor: pointer;
+  }
+  .chosen_method {
+    color: #e94040;
+    text-decoration: underline;
+    margin-left: 10px;
+  }
+
+  .methods_list {
+    top: 24px;
+    right: 0;
+    position: absolute;
+    padding: 10px 15px;
+    opacity: 0;
+
+    transition: top 0.3s, opacity 0.3s;
+    z-index: -1;
+    visibility: hidden;
+
+    &.closed {
+      animation: close 0.3s forwards;
+    }
+  }
+
+  .method {
+    cursor: pointer;
+
+    &.active {
+      color: #e94040;
+    }
+  }
+
+  .method:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  .opened {
+    z-index: 222;
+    visibility: visible;
+    top: 34px;
+    opacity: 1;
+  }
+}
+
+@keyframes close {
+  0% {
+    z-index: 222;
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    z-index: -1;
+  }
+}

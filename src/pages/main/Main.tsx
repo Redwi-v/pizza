@@ -1,120 +1,27 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useEffect } from 'react'
 import style from './main.module.scss'
 import CategoriesContainer from '../../components/Categories/CategoriesContainer';
 import HeaderContainer from '../../components/Header/HeaderContainer';
 import SortingContainer from '../../components/Sorting/SortingContainer';
 import PizzaItemContainer from '../../components/PizzaItem/PizzaItemContainer';
-
-import testPizza from '../../assets/img/test_pizza.png'
-
-const pizza = [
-  {
-    id: 0,
-    imageUrl: testPizza,
-    name: "Пепперони Фреш с перцем",
-    types: [1],
-    sizes: [26, 30, 40],
-    category: 0,
-    rating: 4.1,
-    prise: 420,
-
-  },
-  {
-    id: 1,
-    imageUrl: testPizza,
-    name: "Cырная",
-    types: [0, 1],
-    sizes: [26, 30, 40],
-    category: 0,
-    rating: 4.5,
-    prise: 500,
-
-  },
-  {
-    id: 2,
-    imageUrl: testPizza,
-    name: "С грибами",
-    types: [0, 1],
-    sizes: [26, 30, 40],
-    category: 0,
-    rating: 5.9,
-    prise: 340,
-
-  },
-  {
-    id: 3,
-    imageUrl: testPizza,
-    name: "Креветки по-азиатски",
-    types: [0, 1],
-    sizes: [26, 30, 40],
-    category: 4.8,
-    rating: 4.1,
-    prise: 480,
-
-  },
-  {
-    id: 4,
-    imageUrl: testPizza,
-    name: "Сырный цыпленок",
-    types: [0, 1],
-    sizes: [26, 30, 40],
-    category: 0,
-    rating: 4.2,
-    prise: 550,
-
-  },
-  {
-    id: 5,
-    imageUrl: testPizza,
-    name: "Тоже пицца",
-    types: [0, 1],
-    sizes: [26, 30, 40],
-    category: 0,
-    rating: 4.1,
-    prise: 440,
-  },
-  {
-    id: 6,
-    imageUrl: testPizza,
-    name: "не пицца с креветками",
-    types: [0, 1],
-    sizes: [26, 30, 40],
-    category: 0,
-    rating: 4.0,
-    prise: 240,
-
-  },
-  {
-    id: 7,
-    imageUrl: testPizza,
-    name: "не пицца с креветками",
-    types: [0, 1],
-    sizes: [26, 30, 40],
-    category: 0,
-    rating: 4.4,
-    prise: 640,
-
-  },
-  {
-    id: 8,
-    imageUrl: testPizza,
-    name: "не пицца с креветками",
-    types: [0, 1],
-    sizes: [26, 30],
-    category: 0,
-    rating: 4.7,
-    prise: 660,
-
-  },
-]
+import axios from 'axios';
+import { PizzaItemProps } from '../../components/PizzaItem/pizzaItemProps'
+import Loader from '../../components/_commons/Loader/Loader';
 
 interface MainProps {
 
 }
 
-
-
 const Main: FunctionComponent<MainProps> = () => {
+  const [pizzaItems, setPizzaItems] = React.useState<PizzaItemProps[]>([])
+  const [isLoading, setIsLoading] = React.useState<boolean>(true)
+
+  useEffect(() => {
+    axios.get('https://6367e63cd1d09a8fa61d0196.mockapi.io/items').then(res => {
+      setIsLoading(false)
+      setPizzaItems(res.data)
+    })
+  }, [])
 
   return (
     <div className={style.main}>
@@ -126,13 +33,22 @@ const Main: FunctionComponent<MainProps> = () => {
       <h1 className={style.main_title}>Все пиццы</h1>
       <ul className={style.pizza_list}>
         {
-          pizza.map(pizza => {
+          !isLoading ? pizzaItems.map(pizza => {
             return (
               <li className={style.pizza} key={pizza.id}>
                 <PizzaItemContainer {...pizza} />
               </li>
             )
           })
+            : [...new Array(6)].map((value, index) => {
+              return (
+                <li key={index}>
+                  <Loader />
+
+                </li>
+              )
+            })
+
         }
       </ul>
     </div>

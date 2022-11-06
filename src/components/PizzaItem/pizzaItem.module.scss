@@ -1,0 +1,160 @@
+@mixin light {
+  position: absolute;
+  display: block;
+  max-width: 210px;
+  max-height: 210px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  filter: blur(50px);
+}
+
+.pizza_item {
+  width: 280px;
+
+  .pizza_preview {
+    position: relative;
+    max-width: 260px;
+    margin: 0 auto;
+    z-index: 10;
+
+    &::before {
+      content: '';
+      @include light;
+      background-color: #e940403a;
+    }
+  }
+
+  .name {
+    font-size: 18px;
+    width: 100%;
+    margin-top: 15px;
+    font-weight: 900;
+  }
+  .rating {
+    position: relative;
+    display: flex;
+    margin-top: 10px;
+    &::before {
+      content: '';
+      @include light;
+      width: 20px;
+      height: 20px;
+      z-index: 1;
+      filter: blur(10px);
+      right: auto;
+      background-color: rgba(223, 237, 21, 0.355);
+    }
+  }
+  .star {
+    width: 20px;
+    height: 20px;
+  }
+  .rating_number {
+    margin-left: 5px;
+    font-size: 14px;
+  }
+
+  .purchase {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  .prise_block {
+    font-weight: 700;
+    color: #e94040;
+    text-shadow: #e9404025 1px 1px 10px;
+  }
+  .currency {
+    font-size: 16px;
+    margin-right: 3px;
+  }
+  .prise {
+    font-size: 22px;
+  }
+
+  .counter {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .count_button {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    border: 1px solid #e94040;
+    background: none;
+    cursor: pointer;
+  }
+
+  @mixin stick {
+    position: absolute;
+    width: 14px;
+    height: 1px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 13px;
+  }
+  .minus::before {
+    content: '';
+
+    @include stick;
+    background-color: #e94040;
+  }
+
+  .plus {
+    position: relative;
+    background-color: #e94040;
+
+    &::after,
+    &::before {
+      content: '';
+      @include stick;
+      background-color: #fff;
+    }
+    &::after {
+      transform: rotate(90deg);
+    }
+  }
+  .count {
+    font-weight: 600;
+  }
+
+  .doughs {
+    display: flex;
+    width: 100%;
+    gap: 5px;
+    margin-top: 20px;
+    li {
+      width: 100%;
+    }
+  }
+  .choose_size {
+    display: flex;
+    margin-top: 10px;
+    gap: 5px;
+    li {
+      width: 100%;
+    }
+  }
+  .settings_button {
+    width: 100%;
+    cursor: pointer;
+    color: #fff;
+    border: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .available {
+    opacity: 1;
+    cursor: pointer;
+  }
+}

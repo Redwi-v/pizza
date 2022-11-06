@@ -1,11 +1,10 @@
 import React, { FC } from 'react'
 import PizzaItem from './PizzaItem';
 
+import { PizzaItemProps } from './pizzaItemProps';
 
-interface PizzaItemContainerProps {
-}
-const PizzaItemContainer: FC<PizzaItemContainerProps> = (props) => {
-  const { } = props
+const PizzaItemContainer: FC<PizzaItemProps> = (props) => {
+
   return (<PizzaItem {...props} />);
 }
 

@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useEffect } from 'react'
+import axios from 'axios';
+
 import style from './main.module.scss'
 import CategoriesContainer from '../../components/Categories/CategoriesContainer';
-import HeaderContainer from '../../components/Header/HeaderContainer';
 import SortingContainer from '../../components/Sorting/SortingContainer';
 import PizzaItemContainer from '../../components/PizzaItem/PizzaItemContainer';
-import axios from 'axios';
 import { PizzaItemProps } from '../../components/PizzaItem/pizzaItemProps'
 import Loader from '../../components/_commons/Loader/Loader';
 
@@ -25,7 +25,6 @@ const Main: FunctionComponent<MainProps> = () => {
 
   return (
     <div className={style.main}>
-      <HeaderContainer />
       <div className={style.filters}>
         <CategoriesContainer />
         <SortingContainer />

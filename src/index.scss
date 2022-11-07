@@ -64,7 +64,10 @@ img {
   max-width: 100%;
   display: block;
 }
-
+a{
+  color:  inherit;
+  text-decoration: none;
+}
 /* Указываем понятную периодичность в потоке данных у article*/
 article > * + * {
   margin-top: 1em;

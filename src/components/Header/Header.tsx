@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import style from './header.module.scss'
+import { NavLink } from 'react-router-dom'
 
 //additional imports
 import logo from '../../assets/img/logo.png'
@@ -13,26 +14,22 @@ interface HeaderProps {
 const Header: FunctionComponent<HeaderProps> = () => {
   return (
     <div className={style.header}>
-      <div className={style.left_side}>
-        <a href="#">
-          <img className={style.logo} src={logo} alt="logo" />
-        </a>
+      <NavLink to='/' className={style.left_side}>
+        <img className={style.logo} src={logo} alt="logo" />
         <div className={style.service}>
-          <a href="#">
-            <h1 className={style.name}>pizza</h1>
-          </a>
+          <h1 className={style.name}>pizza</h1>
           <p className={style.subtitle}>сервис по доставке пиццы</p>
         </div>
-      </div>
+      </NavLink>
       <div className={style.right_side}>
-        <div className={`${style.shopping_info} ui_element`}>
-          <button className={style.money}>
+        <NavLink to={'/cart'} className={`${style.shopping_info} ui_element`}>
+          <div className={style.money}>
             520 ₽
-          </button>
-          <button className={style.cart}>
+          </div>
+          <div className={style.cart}>
             <img src={cartIcon} alt='cart icon' /> <span>3</span>
-          </button>
-        </div>
+          </div>
+        </NavLink>
       </div>
     </div>
   );

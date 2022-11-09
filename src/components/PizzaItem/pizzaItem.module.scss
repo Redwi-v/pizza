@@ -79,55 +79,6 @@
     font-size: 22px;
   }
 
-  .counter {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .count_button {
-    position: relative;
-    width: 30px;
-    height: 30px;
-    border-radius: 50px;
-    border: 1px solid #e94040;
-    background: none;
-    cursor: pointer;
-  }
-
-  @mixin stick {
-    position: absolute;
-    width: 14px;
-    height: 1px;
-    left: 0;
-    right: 0;
-    margin: auto;
-    top: 13px;
-  }
-  .minus::before {
-    content: '';
-
-    @include stick;
-    background-color: #e94040;
-  }
-
-  .plus {
-    position: relative;
-    background-color: #e94040;
-
-    &::after,
-    &::before {
-      content: '';
-      @include stick;
-      background-color: #fff;
-    }
-    &::after {
-      transform: rotate(90deg);
-    }
-  }
-  .count {
-    font-weight: 600;
-  }
-
   .doughs {
     display: flex;
     width: 100%;

@@ -4,6 +4,7 @@ import style from './pizzaItem.module.scss'
 //additional imports
 import { PizzaItemProps } from './pizzaItemProps'
 import starIcon from '../../assets/img/icons/star.png'
+import Counter from '../Counter/Counter'
 
 
 
@@ -72,11 +73,7 @@ const PizzaItem: FC<PizzaItemProps> = (props) => {
           <span className={style.currency}>₽</span>
           <span className={style.prise}>{prise}</span>
         </div>
-        <div className={style.counter}>
-          <button className={`${style.count_button} ${style.minus}`}></button>
-          <span className={style.count}>02</span>
-          <button className={`${style.count_button} ${style.plus}`}></button>
-        </div>
+        <Counter />
       </div>
       <ul className={style.doughs}>
         {

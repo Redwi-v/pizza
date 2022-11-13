@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useEffect } from 'react'
-import axios from 'axios';
 
 import style from './main.module.scss'
 import { PizzaItemProps } from '../../components/PizzaItem/pizzaItemProps'
@@ -7,26 +6,29 @@ import Loader from '../../components/_commons/Loader/Loader';
 import PizzaItem from '../../components/PizzaItem/PizzaItem';
 import Categories from '../../components/Categories/Categories';
 import Sorting from '../../components/Sorting/Sorting';
+import pizzaListApi from '../../Api/pizzaList'
+import { Category } from '../../components/Categories/Category';
 
 interface MainProps {
-
+  selectedCategory: number
+  setCategory: (categoryId: number) => void
 }
 
-const Main: FunctionComponent<MainProps> = () => {
+const Main: FunctionComponent<MainProps> = ({ selectedCategory, setCategory }) => {
   const [pizzaItems, setPizzaItems] = React.useState<PizzaItemProps[]>([])
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
 
   useEffect(() => {
-    axios.get('https://6367e63cd1d09a8fa61d0196.mockapi.io/items').then(res => {
+    pizzaListApi.getPizzaList({ categoryId: selectedCategory }).then(pizza => {
       setIsLoading(false)
-      setPizzaItems(res.data)
+      setPizzaItems(pizza)
     })
-  }, [])
+  }, [selectedCategory])
 
   return (
     <div className={style.main}>
       <div className={style.filters}>
-        <Categories />
+        <Categories setCategory={setCategory} selectedCategory={selectedCategory} />
         <Sorting />
       </div>
       <h1 className={style.main_title}>Все пиццы</h1>

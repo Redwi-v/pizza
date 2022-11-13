@@ -2,35 +2,56 @@ import { Console } from 'console'
 import React, { FunctionComponent } from 'react'
 import style from './categories.module.scss'
 
-interface CategoriesProps {
+import { Category } from './Category'
 
+interface CategoriesProps {
+  selectedCategory: number
+  setCategory: (categoryId: number) => void
 }
 
-const categoriesArray: String[] = [
-  'Все',
-  'Мясные',
-  'Вегетарианская',
-  'Гриль',
-  'Острые',
-  'Закрытые',
+const categoriesArray: Category[] = [
+  {
+    title: 'Все',
+    categoryId: 0
+  },
+  {
+    title: 'Мясные',
+    categoryId: 1
+  },
+  {
+    title: 'Вегетарианская',
+    categoryId: 2
+  },
+  {
+    title: 'Гриль',
+    categoryId: 3
+  },
+  {
+    title: 'Острые',
+    categoryId: 4
+  },
+  {
+    title: 'Закрытые',
+    categoryId: 5
+  },
 ]
 
-const Categories: FunctionComponent<CategoriesProps> = () => {
+const Categories: FunctionComponent<CategoriesProps> = ({ selectedCategory, setCategory }) => {
 
-  const [activeCategory, setActiveCategory] = React.useState<number>(0)
 
+  const category = categoriesArray.find(({ categoryId }) => selectedCategory === categoryId)
 
   return (
     <ul className={style.categories_list}>
       {
-        categoriesArray.map((category, index) => {
+        categoriesArray.map(({ title, categoryId }) => {
           return (
             <li
-              className={`${style.category} ${index === activeCategory ? style.active : ''} ui_element`}
-              key={index}
-              onClick={() => setActiveCategory(index)}
+              className={`${style.category} ${categoryId === category?.categoryId ? style.active : ''} ui_element`}
+              key={categoryId}
+              onClick={() => setCategory(categoryId)}
             >
-              {category}
+              {title}
             </li>
           )
         })

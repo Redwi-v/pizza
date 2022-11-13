@@ -12,7 +12,6 @@ import Counter from '../Counter/Counter'
 const pizza_doughs: string[] = ['тонкое', 'традиционное']
 const pizzaSizes: number[] = [24, 30, 40]
 
-
 const PizzaItem: FC<PizzaItemProps> = (props) => {
   const { id, imageUrl, name, prise, types, sizes, category, rating } = props
 

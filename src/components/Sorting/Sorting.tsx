@@ -1,21 +1,38 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 import style from './sorting.module.scss'
 
 interface SortingProps {
-
+  selectedSortItem: SortItem,
+  setSelectedSortItem: (sortItem: SortItem) => void
+}
+interface SortItem {
+  title: string,
+  sortProperty: string,
 }
 
-const Sorting: FC<SortingProps> = () => {
-  const [chosenMethodIndex, setChosenMethodIndex] = React.useState<number>(0)
+const methods: SortItem[] = [
+  {
+    title: 'Популярности',
+    sortProperty: 'rating'
+  },
+  {
+    title: 'Сначала дешевле ',
+    sortProperty: '+prise'
+  },
+  {
+    title: 'Сначала дорогие',
+    sortProperty: 'prise'
+  },
+  {
+    title: 'Алфавиту',
+    sortProperty: 'title',
+  }
+]
+const Sorting: FC<SortingProps> = ({ selectedSortItem, setSelectedSortItem }) => {
   const [methodsListIsOpened, setMethodsListIsOpened] = React.useState<Boolean>(false)
   const methodsListRef = React.useRef(null)
   const methodsListIsOpenedRef = React.useRef(methodsListIsOpened)
 
-  const methods: String[] = [
-    'популярности',
-    'цене',
-    'алфавиту'
-  ]
 
   React.useEffect(() => {
     methodsListIsOpenedRef.current = methodsListIsOpened
@@ -36,27 +53,25 @@ const Sorting: FC<SortingProps> = () => {
     setMethodsListIsOpened(isOpened => !isOpened)
   }
 
-  const choseMethod = (methodIndex: number): void => {
-    setChosenMethodIndex(methodIndex)
-  }
 
 
   return (
     <div className={style.sort}>
       <button ref={methodsListRef} className={style.sort_button} onClick={toggleMethodsList}>
         <span>Сортировать по: </span>
-        <span className={style.chosen_method}>{methods[chosenMethodIndex]}</span>
+        <span className={style.chosen_method}>{selectedSortItem.title}</span>
       </button>
 
       <ul className={`${style.methods_list} ${methodsListIsOpened ? style.opened : style.closed} ui_element`}>
         {
-          methods.map(((method, index) => {
+          methods.map(((sortItem) => {
+            const { sortProperty, title } = sortItem
             return (
               <li
-                className={`${style.method} ${index === chosenMethodIndex ? style.active : ''}`}
-                key={index}
-                onClick={() => choseMethod(index)}
-              >{method}</li>
+                className={`${style.method} ${sortProperty === selectedSortItem.sortProperty ? style.active : ''}`}
+                key={sortProperty}
+                onClick={() => setSelectedSortItem(sortItem)}
+              >{title}</li>
             )
           }))
         }

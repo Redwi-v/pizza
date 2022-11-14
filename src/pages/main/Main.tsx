@@ -7,7 +7,6 @@ import PizzaItem from '../../components/PizzaItem/PizzaItem';
 import Categories from '../../components/Categories/Categories';
 import Sorting from '../../components/Sorting/Sorting';
 import pizzaListApi from '../../Api/pizzaList'
-import { Category } from '../../components/Categories/Category';
 
 interface MainProps {
   selectedCategory: number
@@ -17,19 +16,25 @@ interface MainProps {
 const Main: FunctionComponent<MainProps> = ({ selectedCategory, setCategory }) => {
   const [pizzaItems, setPizzaItems] = React.useState<PizzaItemProps[]>([])
   const [isLoading, setIsLoading] = React.useState<boolean>(true)
+  const [selectedSortItem, setSelectedSortItem] = React.useState({
+    title: 'Популярности',
+    sortProperty: 'rating'
+  })
+
 
   useEffect(() => {
-    pizzaListApi.getPizzaList({ categoryId: selectedCategory }).then(pizza => {
+    setIsLoading(true)
+    pizzaListApi.getPizzaList({ categoryId: selectedCategory, sortProperty: selectedSortItem.sortProperty }).then(pizza => {
       setIsLoading(false)
       setPizzaItems(pizza)
     })
-  }, [selectedCategory])
+  }, [selectedCategory, selectedSortItem])
 
   return (
     <div className={style.main}>
       <div className={style.filters}>
         <Categories setCategory={setCategory} selectedCategory={selectedCategory} />
-        <Sorting />
+        <Sorting selectedSortItem={selectedSortItem} setSelectedSortItem={setSelectedSortItem} />
       </div>
       <h1 className={style.main_title}>Все пиццы</h1>
       <ul className={style.pizza_list}>

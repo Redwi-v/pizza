@@ -12,6 +12,7 @@ import { Category } from './components/Categories/Category';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = React.useState(0)
+  const [sortProperty, setSortProperty] = React.useState('')
 
   const setCategoryId = (categoryId: number) => {
     setSelectedCategory(categoryId)

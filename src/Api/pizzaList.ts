@@ -6,14 +6,19 @@ const axiosConfig = axios.create({
 
 interface CategoryParams {
   categoryId?: number
+  sortProperty?: string
 }
 
 
 class PizzaList {
-  async getPizzaList({ categoryId }: CategoryParams) {
-    const categoryParam = categoryId ? `category=${categoryId}` : '';
+  async getPizzaList({ categoryId, sortProperty }: CategoryParams) {
 
-    const res = await axiosConfig.get(`/items?${categoryParam}`);
+    const categoryParam = categoryId ? `category=${categoryId}` : '';
+    const order = sortProperty?.includes('+') ? 'asc' : 'desc'
+    const sorting = sortProperty?.replace('+', '')
+
+
+    const res = await axiosConfig.get(`/items?${categoryParam}&sortBy=${sorting}&order=${order}`);
     return res.data;
   }
 }

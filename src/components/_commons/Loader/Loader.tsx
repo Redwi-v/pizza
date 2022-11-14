@@ -13,7 +13,7 @@ const Loader: FC<LoaderProps> = (props) => {
       width={280}
       height={474}
       viewBox="0 0 280 474"
-      backgroundColor="#f3f3f3"
+      backgroundColor="#464058"
       foregroundColor="#ecebeb"
       {...props}
     >

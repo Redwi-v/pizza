@@ -1,5 +1,5 @@
-import { Console } from 'console'
 import React, { FunctionComponent } from 'react'
+import { useParams } from 'react-router-dom'
 import style from './categories.module.scss'
 
 import { Category } from './Category'
@@ -37,6 +37,14 @@ const categoriesArray: Category[] = [
 ]
 
 const Categories: FunctionComponent<CategoriesProps> = ({ selectedCategory, setCategory }) => {
+
+  // если в url есть параметры сетаем их 
+  const { categoryId } = useParams()
+  React.useEffect(() => {
+    if (categoryId) {
+      setCategory(+categoryId)
+    }
+  }, [])
 
 
   const category = categoriesArray.find(({ categoryId }) => selectedCategory === categoryId)

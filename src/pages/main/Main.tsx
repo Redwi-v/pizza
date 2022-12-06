@@ -6,47 +6,30 @@ import Loader from '../../components/_commons/Loader/Loader';
 import PizzaItem from '../../components/PizzaItem/PizzaItem';
 import Categories from '../../components/Categories/Categories';
 import Sorting from '../../components/Sorting/Sorting';
-import pizzaListApi from '../../Api/pizzaList'
-
-interface MainProps {
-  selectedCategory: number
-  setCategory: (categoryId: number) => void
-}
-
-const Main: FunctionComponent<MainProps> = ({ selectedCategory, setCategory }) => {
-  const [pizzaItems, setPizzaItems] = React.useState<PizzaItemProps[]>([])
-  const [isLoading, setIsLoading] = React.useState<boolean>(true)
-  const [selectedSortItem, setSelectedSortItem] = React.useState({
-    title: 'Популярности',
-    sortProperty: 'rating'
-  })
+import { MainProps } from './props'
 
 
-  useEffect(() => {
-    setIsLoading(true)
-    pizzaListApi.getPizzaList({ categoryId: selectedCategory, sortProperty: selectedSortItem.sortProperty }).then(pizza => {
-      setIsLoading(false)
-      setPizzaItems(pizza)
-    })
-  }, [selectedCategory, selectedSortItem])
+const Main: FunctionComponent<MainProps> = ({ selectedCategory, setCategory, pizzaList, pizzaListIsLoading, sort, setFlagsFromString }) => {
+
+
 
   return (
     <div className={style.main}>
       <div className={style.filters}>
         <Categories setCategory={setCategory} selectedCategory={selectedCategory} />
-        <Sorting selectedSortItem={selectedSortItem} setSelectedSortItem={setSelectedSortItem} />
+        <Sorting selectedSortItem={sort} setSelectedSortItem={setFlagsFromString} />
       </div>
       <h1 className={style.main_title}>Все пиццы</h1>
       <ul className={style.pizza_list}>
         {
-          !isLoading ? pizzaItems.map(pizza => {
+          !pizzaListIsLoading ? pizzaList.map(pizza => {
             return (
               <li className={style.pizza} key={pizza.id}>
                 <PizzaItem {...pizza} />
               </li>
             )
           })
-            : [...new Array(6)].map((value, index) => {
+            : [...new Array(8)].map((value, index) => {
               return (
                 <li key={index}>
                   <Loader />

@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useParams } from 'react-router-dom';
 import style from './sorting.module.scss'
 
 interface SortingProps {
@@ -32,7 +33,15 @@ const Sorting: FC<SortingProps> = ({ selectedSortItem, setSelectedSortItem }) =>
   const [methodsListIsOpened, setMethodsListIsOpened] = React.useState<Boolean>(false)
   const methodsListRef = React.useRef(null)
   const methodsListIsOpenedRef = React.useRef(methodsListIsOpened)
+  const { sort } = useParams()
 
+  // если при первом рендаре в url нашли параметры сетаем их 
+  React.useEffect(() => {
+    if (sort) {
+      const selectedSortInUrl = methods.find(sortMethod => sortMethod.sortProperty === sort)
+      selectedSortInUrl && setSelectedSortItem(selectedSortInUrl)
+    }
+  }, [])
 
   React.useEffect(() => {
     methodsListIsOpenedRef.current = methodsListIsOpened

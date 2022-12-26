@@ -8,11 +8,32 @@ import CartItem from '../../components/CartItem/CartItem';
 import CartIcon from '../../assets/img/icons/cart.svg'
 import clearIcon from '../../assets/img/icons/clear.svg'
 import arrowIcon from '../../assets/img/icons/arrow.svg'
+import { cart } from '../../redux/Slices/cart';
+import { useAppDispatch } from '../../redux/redux';
 
 
 interface CartProps {
 }
 const Cart: FC<CartProps> = (props) => {
+
+  //redux logic 
+  const { addItem } = cart.actions
+  const dispatch = useAppDispatch()
+  React.useEffect(() => {
+    dispatch(addItem({
+      id: 1,
+      doughType: 'mini',
+      img: 'helol',
+      name: 'pizza',
+      prise: 100,
+      size: 30
+    }))
+
+  }, [])
+
+  console.log('cart render');
+
+
   const { } = props
   return (
     <div className="">

@@ -1,8 +1,14 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import pizzaList from './Slices/pizzaList'
 
+import cart from './Slices/cart'
+
+import { enableMapSet } from 'immer'
+enableMapSet()
+
 const reducers = combineReducers({
-  pizzaList
+  pizzaList,
+  cart,
 })
 
 const store = () => configureStore({

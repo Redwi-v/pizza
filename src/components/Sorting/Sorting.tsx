@@ -48,13 +48,19 @@ const Sorting: FC<SortingProps> = ({ selectedSortItem, setSelectedSortItem }) =>
   }, [methodsListIsOpened])
 
   React.useEffect(() => {
-    window.addEventListener('click', e => {
+    const toggleSortPanel = (e: Event) => {
       const target: any = e.target
+      console.log('click');
       if (methodsListIsOpenedRef.current && target.parentNode !== methodsListRef.current) {
         toggleMethodsList()
       }
-    })
+    }
 
+    window.addEventListener('click', toggleSortPanel)
+    return () => {
+      window.removeEventListener('click', toggleSortPanel)
+
+    }
   }, [])
 
 

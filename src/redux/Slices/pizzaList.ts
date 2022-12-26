@@ -1,8 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { setFlagsFromString } from "v8";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import pizzaListApi from '../../Api/pizzaList'
-
-
 
 
 export const fetchPizzas = createAsyncThunk('pizzaList/fetchPizzas', async (payload: { selectedCategory: number, sortProperty: string }) => {

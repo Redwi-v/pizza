@@ -9,16 +9,19 @@ interface MainContainerProps {
 }
 
 const MainContainer: React.FC<MainContainerProps> = (props) => {
+  //redux logic
   const { setCategoryId, setFlagsFromString } = pizzaList.actions
   const { categoryId, list, isLoading, sort } = useAppSelector(state => state.pizzaList)
+  const dispatch = useAppDispatch()
+
+  //main logic
   const [urlParamsChecked, setUrlParamsChecked] = React.useState<Boolean>(false)
   const isMounted = React.useRef(false)
 
-  const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
 
-  // изменяем url только после 1го рендера
+  // изменяем url только после 2го рендера
   React.useEffect(() => {
     if (isMounted.current) {
       navigate(`/${sort.sortProperty}/${categoryId}`)

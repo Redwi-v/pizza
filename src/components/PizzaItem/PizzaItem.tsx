@@ -16,7 +16,6 @@ const PizzaItem: FC<PizzaItemProps> = (props) => {
   const { id, imageUrl, name, prise, types, sizes, category, rating } = props
 
 
-
   // additional renders
 
   const renderPizzaSizes = (): React.ReactNode => {

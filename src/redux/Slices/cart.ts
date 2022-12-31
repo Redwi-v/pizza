@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import isEqual from "../../utils/isEqual";
 
 
 interface IPizzaItem {
@@ -10,19 +11,21 @@ interface IPizzaItem {
   size: Number,
 }
 
-
-type ItemStructure = [IPizzaItem, number]
+type ItemCount = number 
+type ItemStructure = [ItemCount, IPizzaItem]
 
 interface ICartState {
   itemsCount: number,
   prise: number,
   items: Array<ItemStructure>
+  uniqueItems: Array<ItemStructure>
 }
 
 const initialState = {
   itemsCount: 0,
   prise: 0,
-  items: []
+  items: [],
+  uniqueItems: [],
 } as ICartState
 
 export const cart = createSlice({
@@ -31,7 +34,42 @@ export const cart = createSlice({
   reducers: {
     addItem(state, action: PayloadAction<IPizzaItem>) {
 
-      state.items.push([action.payload, 1])
+      let isFounded: boolean = false
+      let isFoundedEqual: boolean = false
+
+      state.items.forEach(item => {
+        const obj = item[1]
+        
+        if(obj.id === action.payload.id && !isFounded) {
+          item[0] += 1
+          isFounded = true
+        }
+        
+      })
+
+      state.uniqueItems.forEach(item => {
+        const gg = isEqual( item[1] , action.payload)
+
+        console.log(`unical ${gg}`);
+        
+
+        if(isEqual( item[1] , action.payload) && !isFoundedEqual){
+          console.log('check');
+          
+          item[0] += 1
+          isFoundedEqual = true
+        }
+      })
+
+      if(!isFoundedEqual) {
+        state.uniqueItems.push([1, action.payload])
+      }
+
+      if(!isFounded) {
+        state.items.push([1, action.payload])
+      }
+
+
     }
 
   },

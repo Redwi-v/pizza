@@ -16,22 +16,14 @@ interface CartProps {
 }
 const Cart: FC<CartProps> = (props) => {
 
+
+
+
   //redux logic 
   const { addItem } = cart.actions
   const dispatch = useAppDispatch()
-  React.useEffect(() => {
-    dispatch(addItem({
-      id: 1,
-      doughType: 'mini',
-      img: 'helol',
-      name: 'pizza',
-      prise: 100,
-      size: 30
-    }))
 
-  }, [])
 
-  console.log('cart render');
 
 
   const { } = props
@@ -41,7 +33,7 @@ const Cart: FC<CartProps> = (props) => {
 
         <div className={style.top}>
           <h1 className={style.title}><img src={CartIcon} alt="cart" /> Корзина</h1>
-          <button className={style.clear}>
+          <button className={style.clear} >
             <img src={clearIcon} alt="clear" />
             Очистить корзину
           </button>

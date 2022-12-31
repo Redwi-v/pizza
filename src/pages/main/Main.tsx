@@ -6,7 +6,7 @@ import Loader from '../../components/_commons/Loader/Loader';
 import PizzaItem from '../../components/PizzaItem/PizzaItem';
 import Categories from '../../components/Categories/Categories';
 import Sorting from '../../components/Sorting/Sorting';
-import { MainProps } from './props'
+import { MainProps } from './props';
 
 
 const Main: FunctionComponent<MainProps> = ({ selectedCategory, setCategory, pizzaList, pizzaListIsLoading, sort, setFlagsFromString }) => {

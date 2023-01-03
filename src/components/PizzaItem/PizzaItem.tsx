@@ -8,27 +8,46 @@ import Counter from '../Counter/Counter'
 
 
 
-
+// settings data
 const pizza_doughs: string[] = ['тонкое', 'традиционное']
-const pizzaSizes: number[] = [24, 30, 40]
+const pizzaSizes: number[] = [26, 30, 40]
 
+
+// Component
 const PizzaItem: FC<PizzaItemProps> = (props) => {
   const { id, imageUrl, name, prise, types, sizes, category, rating } = props
 
 
+  //logic
+  const [choosedSize , setChoosedSize] = React.useState<number>(pizzaSizes[0])
+
+
+
+
   // additional renders
-
   const renderPizzaSizes = (): React.ReactNode => {
-    return pizzaSizes.map((pizzaSize) => {
-      let thisSizeAvailable: boolean = false
+    
 
-      sizes.forEach(size => {
-        if (size === pizzaSize) thisSizeAvailable = true
-      })
+    return pizzaSizes.map((pizzaSize, index) => {
+      let thisSizeAvailable: boolean = false
+      let isChoosedCssClass: string =  ''
+
+      thisSizeAvailable =  sizes.indexOf(pizzaSize) === -1 ? false : true
+      isChoosedCssClass = (pizzaSize === choosedSize) && thisSizeAvailable ? style.choosedElement : ''
+
+      
+
+      const isAvailableChooseClass = thisSizeAvailable ? style.available : ''
+
+      const setSize = () => {
+        if(thisSizeAvailable) setChoosedSize(pizzaSize)
+        
+      }
+
 
       return (
         <li key={pizzaSize}>
-          <button className={`${style.settings_button} ${thisSizeAvailable ? style.available : ''} ui_element`}>
+          <button onClick={setSize} className={`${style.settings_button} ${isAvailableChooseClass} ${isChoosedCssClass} ui_element`}>
             {pizzaSize}
           </button>
         </li>

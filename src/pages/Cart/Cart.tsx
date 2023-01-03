@@ -16,6 +16,7 @@ interface CartProps {
 }
 const Cart: FC<CartProps> = (props) => {
 
+  const { } = props
 
 
 
@@ -24,9 +25,6 @@ const Cart: FC<CartProps> = (props) => {
   const dispatch = useAppDispatch()
 
 
-
-
-  const { } = props
   return (
     <div className="">
       <div className={style.container}>

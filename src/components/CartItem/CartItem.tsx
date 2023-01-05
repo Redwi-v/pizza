@@ -26,7 +26,7 @@ const CartItem: FC<CartItemProps> = (props) => {
           </div>
         </div>
       </div>
-      <Counter />
+      {/* <Counter /> */}
       <h2 className={style.prise}>770 <span>₽</span></h2>
       <button className={style.delete}>
         <img src={crossIcon} alt="delete" />

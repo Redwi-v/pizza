@@ -1,6 +1,8 @@
-export interface cartPizzaItem {
-  id: number
-  totalPrise: number
-  count: number
-
+export interface IPizzaItem {
+  id: number | string,
+  prise: number | string
+  img: String,
+  name: String,
+  doughType: String,
+  size: Number,
 }

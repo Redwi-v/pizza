@@ -1,15 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IPizzaItem } from "../../models/cartPizzaItem";
 import isEqual from "../../utils/isEqual";
 
 
-interface IPizzaItem {
-  id: number | string,
-  prise: number | string
-  img: String,
-  name: String,
-  doughType: String,
-  size: Number,
-}
+
 
 type ItemCount = number 
 type ItemStructure = [ItemCount, IPizzaItem]

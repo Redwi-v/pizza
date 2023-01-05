@@ -7,5 +7,7 @@ export interface PizzaItemProps {
   sizes: number[]
   category: number
   rating: number
+  addItem: (item: any) => void
+  count: number
 }
 

@@ -9,8 +9,8 @@ import Sorting from '../../components/Sorting/Sorting';
 import { MainProps } from './props';
 
 
-const Main: FunctionComponent<MainProps> = ({ selectedCategory, setCategory, pizzaList, pizzaListIsLoading, sort, setFlagsFromString }) => {
-
+const Main: FunctionComponent<MainProps> = (props) => {
+  const { selectedCategory, setCategory, pizzaList, pizzaListIsLoading, sort, setFlagsFromString , addItem, items} = props 
 
 
   return (
@@ -23,9 +23,12 @@ const Main: FunctionComponent<MainProps> = ({ selectedCategory, setCategory, piz
       <ul className={style.pizza_list}>
         {
           !pizzaListIsLoading ? pizzaList.map(pizza => {
+
+            
+
             return (
               <li className={style.pizza} key={pizza.id}>
-                <PizzaItem {...pizza} />
+                <PizzaItem {...pizza} addItem={addItem}  />
               </li>
             )
           })

@@ -54,6 +54,5 @@ export const pizzaList = createSlice({
 
 })
 
-console.log(pizzaList);
 
 export default pizzaList.reducer

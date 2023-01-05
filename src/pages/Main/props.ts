@@ -5,4 +5,6 @@ export interface MainProps {
   sort: any,
   setFlagsFromString: (sort: any) => void
   setCategory: (categoryId: number) => void
+  addItem: (item: any) => void
+  items: Array<any>
 }

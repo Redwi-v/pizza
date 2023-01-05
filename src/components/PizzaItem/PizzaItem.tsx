@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react'
+import React, { FC } from 'react'
 import style from './pizzaItem.module.scss'
 
 //additional imports
@@ -15,14 +15,24 @@ const pizzaSizes: number[] = [26, 30, 40]
 
 // Component
 const PizzaItem: FC<PizzaItemProps> = (props) => {
-  const { id, imageUrl, name, prise, types, sizes, category, rating } = props
+  const { id, imageUrl, name, prise, types, sizes, category, rating, addItem, count } = props
 
 
   //logic
   const [selectedSize , setSelectedSize] = React.useState<number | null>(null)
   const [selectedDought , setSelectedDought] = React.useState<number | null>(null)
 
-  
+  const addPizza = () => {
+    
+    addItem({
+      id: id,
+      prise: prise,
+      img: imageUrl,
+      name: name,
+      doughType: selectedDought,
+      size: selectedSize,
+    })
+  }
 
   // --additional renders
   const renderPizzaSizes = (): React.ReactNode => {
@@ -55,7 +65,7 @@ const PizzaItem: FC<PizzaItemProps> = (props) => {
           <span className={style.currency}>₽</span>
           <span className={style.prise}>{prise}</span>
         </div>
-        <Counter />
+        <Counter count={count} minusCallBack={() => {}} plusCallBack={addPizza}/>
       </div>
       <ul className={style.doughs}>
         {
@@ -72,7 +82,7 @@ const PizzaItem: FC<PizzaItemProps> = (props) => {
 }
 
 
-//helper 
+// Select helper 
 interface SelectProps {
   availableItems: Array<number | string> // items приходящие к нам с объектом (для проверки лежит ли в этом масиве item)
   item: number | string // нужно для сравнения и хранения (может принимать значение поля text)

@@ -5,6 +5,7 @@ import style from './pizzaItem.module.scss'
 import { PizzaItemProps } from './pizzaItemProps'
 import starIcon from '../../assets/img/icons/star.png'
 import Counter from '../Counter/Counter'
+import { TRUE } from 'sass'
 
 
 
@@ -15,20 +16,25 @@ const pizzaSizes: number[] = [26, 30, 40]
 
 // Component
 const PizzaItem: FC<PizzaItemProps> = (props) => {
-  const { id, imageUrl, name, prise, types, sizes, category, rating, addItem, cartPizza } = props
+  const { id, imageUrl, name, prise, types, sizes, category, rating, addItem, cartPizza, delItem } = props
 
   const [count, setCount] = React.useState<number>(0)
 
+
+  // find pizza count in cart
   React.useEffect(() => {
 
-    cartPizza.forEach((pizza) => {
-      const [countInCart, item]: any = pizza
+    let isFind = false
 
-      if (item.id === id) {
-        setCount(countInCart)
+    cartPizza.forEach((item: any) => {
+      if (item[1].id === id) {
+        setCount(item[0])
+        isFind = true
       }
     })
-  }, [cartPizza])
+
+    if (!isFind) setCount(0)
+  })
 
 
 
@@ -46,6 +52,11 @@ const PizzaItem: FC<PizzaItemProps> = (props) => {
       doughType: selectedDought,
       size: selectedSize,
     })
+  }
+
+  const minusPizza = () => {
+
+    delItem(id)
   }
 
   // --additional renders
@@ -79,7 +90,7 @@ const PizzaItem: FC<PizzaItemProps> = (props) => {
           <span className={style.currency}>₽</span>
           <span className={style.prise}>{prise}</span>
         </div>
-        <Counter count={count} minusCallBack={() => { }} plusCallBack={addPizza} />
+        <Counter count={count} minusCallBack={minusPizza} plusCallBack={addPizza} />
       </div>
       <ul className={style.doughs}>
         {

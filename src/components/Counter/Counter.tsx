@@ -8,7 +8,7 @@ interface CounterProps {
   count: number
 }
 const Counter: FC<CounterProps> = (props) => {
-  const {plusCallBack,  minusCallBack, count} = props
+  const { plusCallBack, minusCallBack, count } = props
 
 
 

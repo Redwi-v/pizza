@@ -66,16 +66,17 @@ export const cart = createSlice({
 
       const itemForDele = action.payload
 
-      deleteArrItem(state.items, itemForDele)
-      deleteArrItem(state.uniqueItems, itemForDele)
-
-      --state.itemsCount
-
       state.items.forEach(([count, item]) => {
         if (item.id === itemForDele) {
+
           state.prise -= Number(item.prise)
         }
       })
+      --state.itemsCount
+      deleteArrItem(state.items, itemForDele)
+      deleteArrItem(state.uniqueItems, itemForDele)
+
+
 
     }
 

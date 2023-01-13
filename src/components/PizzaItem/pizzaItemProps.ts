@@ -11,5 +11,6 @@ export interface PizzaItemProps {
   rating: number
   addItem: (item: any) => void
   cartPizza: CartItemProps[]
+  delItem: (id: number) => void
 }
 

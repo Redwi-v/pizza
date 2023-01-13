@@ -5,7 +5,6 @@ import pizzaListApi from '../../Api/pizzaList'
 export const fetchPizzas = createAsyncThunk('pizzaList/fetchPizzas', async (payload: { selectedCategory: number, sortProperty: string }) => {
   const { selectedCategory, sortProperty } = payload
   const data = await pizzaListApi.getPizzaList({ categoryId: selectedCategory, sortProperty: sortProperty })
-  console.log(data);
 
   return data
 })
@@ -30,8 +29,6 @@ export const pizzaList = createSlice({
     },
 
     setFlagsFromString(state, { payload }) {
-      console.log('sort');
-      console.log(payload);
 
       state.sort = payload
     },

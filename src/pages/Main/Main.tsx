@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useEffect } from 'react'
 
 import style from './main.module.scss'
-import { PizzaItemProps } from '../../components/PizzaItem/pizzaItemProps'
 import Loader from '../../components/_commons/Loader/Loader';
 import PizzaItem from '../../components/PizzaItem/PizzaItem';
 import Categories from '../../components/Categories/Categories';
@@ -10,7 +9,7 @@ import { MainProps } from './props';
 
 
 const Main: FunctionComponent<MainProps> = (props) => {
-  const { selectedCategory, setCategory, pizzaList, pizzaListIsLoading, sort, setFlagsFromString, addItem, items } = props
+  const { selectedCategory, setCategory, pizzaList, pizzaListIsLoading, sort, setFlagsFromString, addItem, items, delItem } = props
 
 
   return (
@@ -28,7 +27,7 @@ const Main: FunctionComponent<MainProps> = (props) => {
 
             return (
               <li className={style.pizza} key={pizza.id}>
-                <PizzaItem {...pizza} addItem={addItem} cartPizza={items} />
+                <PizzaItem {...pizza} addItem={addItem} cartPizza={items} delItem={delItem} />
               </li>
             )
           })

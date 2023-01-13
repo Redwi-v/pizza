@@ -7,4 +7,5 @@ export interface MainProps {
   setCategory: (categoryId: number) => void
   addItem: (item: any) => void
   items: Array<any>
+  delItem: (id: number) => void
 }

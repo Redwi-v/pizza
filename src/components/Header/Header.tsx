@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom'
 //additional imports
 import logo from '../../assets/img/logo.png'
 import cartIcon from '../../assets/img/icons/cart.svg'
+import { useAppSelector } from '../../redux/redux'
 
 
 interface HeaderProps {
@@ -12,6 +13,9 @@ interface HeaderProps {
 }
 
 const Header: FunctionComponent<HeaderProps> = () => {
+
+  const { itemsCount, prise } = useAppSelector(selector => selector.cart)
+
   return (
     <div className={style.header}>
       <NavLink to='/' className={style.left_side}>
@@ -24,10 +28,10 @@ const Header: FunctionComponent<HeaderProps> = () => {
       <div className={style.right_side}>
         <NavLink to={'/cart'} className={`${style.shopping_info} ui_element`}>
           <div className={style.money}>
-            520 ₽
+            {prise} ₽
           </div>
           <div className={style.cart}>
-            <img src={cartIcon} alt='cart icon' /> <span>3</span>
+            <img src={cartIcon} alt='cart icon' /> <span>{itemsCount}</span>
           </div>
         </NavLink>
       </div>

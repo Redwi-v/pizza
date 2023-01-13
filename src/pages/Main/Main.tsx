@@ -10,7 +10,7 @@ import { MainProps } from './props';
 
 
 const Main: FunctionComponent<MainProps> = (props) => {
-  const { selectedCategory, setCategory, pizzaList, pizzaListIsLoading, sort, setFlagsFromString , addItem, items} = props 
+  const { selectedCategory, setCategory, pizzaList, pizzaListIsLoading, sort, setFlagsFromString, addItem, items } = props
 
 
   return (
@@ -24,11 +24,11 @@ const Main: FunctionComponent<MainProps> = (props) => {
         {
           !pizzaListIsLoading ? pizzaList.map(pizza => {
 
-            
+
 
             return (
               <li className={style.pizza} key={pizza.id}>
-                <PizzaItem {...pizza} addItem={addItem}  />
+                <PizzaItem {...pizza} addItem={addItem} cartPizza={items} />
               </li>
             )
           })

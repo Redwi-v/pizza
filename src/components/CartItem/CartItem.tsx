@@ -9,10 +9,11 @@ import crossRedIcon from '../../assets/img/icons/crossRed.png'
 
 export interface CartItemProps {
   imgUrl: string
+  delItem: () => void
 }
 
 const CartItem: FC<CartItemProps> = (props) => {
-  const { imgUrl } = props
+  const { imgUrl, delItem } = props
   return (
     <div className={`${style.item} ui_element`}>
       <div className={style.left_side}>
@@ -28,7 +29,7 @@ const CartItem: FC<CartItemProps> = (props) => {
       </div>
       {/* <Counter /> */}
       <h2 className={style.prise}>770 <span>₽</span></h2>
-      <button className={style.delete}>
+      <button onClick={delItem} className={style.delete}>
         <img src={crossIcon} alt="delete" />
         <img src={crossRedIcon} alt="delete" />
       </button>

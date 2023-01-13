@@ -1,3 +1,5 @@
+import { CartItemProps } from "../CartItem/CartItem"
+
 export interface PizzaItemProps {
   id: number
   imageUrl: string
@@ -8,6 +10,6 @@ export interface PizzaItemProps {
   category: number
   rating: number
   addItem: (item: any) => void
-  count: number
+  cartPizza: CartItemProps[]
 }
 

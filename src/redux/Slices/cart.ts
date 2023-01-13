@@ -5,8 +5,9 @@ import isEqual from "../../utils/isEqual";
 
 
 
-type ItemCount = number 
+type ItemCount = number
 type ItemStructure = [ItemCount, IPizzaItem]
+type ItemId = number
 
 interface ICartState {
   itemsCount: number,
@@ -33,40 +34,64 @@ export const cart = createSlice({
 
       state.items.forEach(item => {
         const obj = item[1]
-        
-        if(obj.id === action.payload.id && !isFounded) {
+
+        if (obj.id === action.payload.id && !isFounded) {
           item[0] += 1
           isFounded = true
         }
-        
+
       })
 
       state.uniqueItems.forEach(item => {
-        const gg = isEqual( item[1] , action.payload)
-
-        console.log(`unical ${gg}`);
-        
-
-        if(isEqual( item[1] , action.payload) && !isFoundedEqual){
-          console.log('check');
-          
+        if (isEqual(item[1], action.payload) && !isFoundedEqual) {
           item[0] += 1
           isFoundedEqual = true
         }
       })
 
-      if(!isFoundedEqual) {
+      if (!isFoundedEqual) {
         state.uniqueItems.push([1, action.payload])
       }
 
-      if(!isFounded) {
+      if (!isFounded) {
         state.items.push([1, action.payload])
       }
 
+      // count and prise
+      state.prise += Number(action.payload.prise)
+      state.itemsCount++
+    },
+
+    deleteItem(state, action: PayloadAction<ItemId>) {
+
+      const itemForDele = action.payload
+
+      deleteArrItem(state.items, itemForDele)
+      deleteArrItem(state.uniqueItems, itemForDele)
+
+      --state.itemsCount
+
+      state.items.forEach(([count, item]) => {
+        if (item.id === itemForDele) {
+          state.prise -= Number(item.prise)
+        }
+      })
 
     }
 
+
   },
 })
+
+function deleteArrItem(array: ItemStructure[], itemId: ItemId) {
+  array.forEach(([count, obj]: [number, IPizzaItem], index) => {
+
+    if (obj.id === itemId && (count - 1) === 0) {
+      array.splice(index, 1)
+    } else if (obj.id === itemId) {
+      --array[index][0]
+    }
+  })
+}
 
 export default cart.reducer

@@ -61,8 +61,6 @@ export const cart = createSlice({
         },
 
         deleteItem(state, action: PayloadAction<delSettings>) {
-            console.log(action.payload);
-
             const { item: payloadItem, delAll = false } = action.payload;
 
             const reduceParameters = (count: number, prise: number) => {

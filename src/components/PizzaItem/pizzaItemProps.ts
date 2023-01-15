@@ -1,3 +1,4 @@
+import { IPizzaItem } from "../../models/cartPizzaItem"
 import { CartItemProps } from "../CartItem/CartItem"
 
 export interface PizzaItemProps {
@@ -11,6 +12,6 @@ export interface PizzaItemProps {
   rating: number
   addItem: (item: any) => void
   cartPizza: CartItemProps[]
-  delItem: (id: number) => void
+  delItem: (item: IPizzaItem) => void
 }
 

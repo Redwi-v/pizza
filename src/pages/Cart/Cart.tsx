@@ -3,13 +3,13 @@ import React, { FC } from 'react'
 import style from './cart.module.scss'
 
 //images
-import testPizza from '../../assets/img/test_pizza.png'
 import CartItem from '../../components/CartItem/CartItem';
 import CartIcon from '../../assets/img/icons/cart.svg'
 import clearIcon from '../../assets/img/icons/clear.svg'
 import arrowIcon from '../../assets/img/icons/arrow.svg'
 import { cart } from '../../redux/Slices/cart';
 import { useAppDispatch, useAppSelector } from '../../redux/redux';
+import { IPizzaItem } from '../../models/cartPizzaItem';
 
 
 interface CartProps {
@@ -21,22 +21,28 @@ const Cart: FC<CartProps> = (props) => {
 
 
   //redux logic 
-  const { deleteItem } = cart.actions
-  const { uniqueItems } = useAppSelector(selector => selector.cart)
+  const { deleteItem, clear, addItem } = cart.actions
+  const { uniqueItems, prise, itemsCount } = useAppSelector(selector => selector.cart)
   const dispatch = useAppDispatch()
 
-  const delItem = (delItem: number) => {
-    dispatch(deleteItem(delItem))
+  const delItem = (item: IPizzaItem, delAll?: boolean) => {
+    dispatch(deleteItem({
+      item: item,
+      delAll
+    }))
+  }
+  const clearAction = () => {
+    dispatch(clear())
   }
 
 
   return (
-    <div className="">
+    <>
       <div className={style.container}>
 
         <div className={style.top}>
           <h1 className={style.title}><img src={CartIcon} alt="cart" /> Корзина</h1>
-          <button className={style.clear} >
+          <button onClick={clearAction} className={style.clear} >
             <img src={clearIcon} alt="clear" />
             Очистить корзину
           </button>
@@ -44,28 +50,25 @@ const Cart: FC<CartProps> = (props) => {
         <ul className={style.list}>
           {
             uniqueItems.map(([count, item], index) => {
-              const tempArr = []
 
-              for (let i = 0; i < count; i++) {
-                console.log('rend');
+              const uniqueKey = String(item.id) + item.doughType + item.size
 
-                tempArr.push(
-                  <li key={String(item.id) + i}>
-                    <CartItem imgUrl={item.img} delItem={() => delItem(Number(item.id))} />
-                  </li>
-                )
-              }
-              return tempArr
+
+              return (
+                <li key={uniqueKey}>
+                  <CartItem item={item} addItem={() => dispatch(addItem(item))} delItem={delItem} count={count} />
+                </li>
+              )
             })
           }
         </ul>
 
         <div className={style.general_information}>
           <div className={style.pizza_count}>
-            Всего пицц: <span>3 шт.</span>
+            Всего пицц: <span>{itemsCount} шт.</span>
           </div>
           <div className={style.check}>
-            Сумма заказа: <span>900 ₽</span>
+            Сумма заказа: <span>{prise} ₽</span>
           </div>
         </div>
         <div className={style.actions}>
@@ -73,10 +76,10 @@ const Cart: FC<CartProps> = (props) => {
             <img src={arrowIcon} alt="back" />
             Вернуться назад
           </button>
-          <button className={style.pay_btn}>Оплатить сейчас</button>
+          <button className={style.pay_btn}>Оформить заказ</button>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

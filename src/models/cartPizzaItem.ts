@@ -3,6 +3,6 @@ export interface IPizzaItem {
   prise: number | string
   img: string,
   name: string,
-  doughType: string,
+  doughType: number,
   size: number,
 }

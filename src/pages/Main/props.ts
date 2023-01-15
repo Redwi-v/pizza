@@ -1,3 +1,5 @@
+import { IPizzaItem } from "../../models/cartPizzaItem"
+
 export interface MainProps {
   selectedCategory: number
   pizzaList: any[],
@@ -7,5 +9,5 @@ export interface MainProps {
   setCategory: (categoryId: number) => void
   addItem: (item: any) => void
   items: Array<any>
-  delItem: (id: number) => void
+  delItem: (item: IPizzaItem) => void
 }

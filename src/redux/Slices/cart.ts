@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IPizzaItem } from '../../models/cartPizzaItem';
 import isEqual from '../../utils/isEqual';
+import { RootState } from '../store';
 
 type ItemCount = number;
 type ItemStructure = [ItemCount, IPizzaItem];
@@ -136,5 +137,7 @@ export const cart = createSlice({
         },
     },
 });
+
+export const cartSelector = (state: RootState) => state.cart;
 
 export default cart.reducer;

@@ -10,7 +10,7 @@ const EmptyСart: FC<EmptyСartProps> = (props) => {
         <div className={style.empty_cart}>
             <h1 className={style.title}>Корзина пустая 🍽</h1>
             <p className={style.explanation}>выберете на главной странице пару пицц и они появятся здесь</p>
-            <img className={style.pizza_guy} src={pizzaGuyImage} alt="just pizza guy" />
+            <img className={style.pizza_guy} src={pizzaGuyImage} alt="just pizza guy" about="я ее украл простите (" />
             <NavLink className={style.link} to="/">
                 Главная
             </NavLink>

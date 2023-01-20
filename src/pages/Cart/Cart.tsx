@@ -7,7 +7,7 @@ import CartItem from '../../components/CartItem/CartItem';
 import CartIcon from '../../assets/img/icons/cart.svg';
 import clearIcon from '../../assets/img/icons/clear.svg';
 import arrowIcon from '../../assets/img/icons/arrow.svg';
-import { cart } from '../../redux/Slices/cart';
+import { cart, cartSelector } from '../../redux/Slices/cart';
 import { useAppDispatch, useAppSelector } from '../../redux/redux';
 import { IPizzaItem } from '../../models/cartPizzaItem';
 import EmptyСart from '../EmptyСart/EmptyСart';
@@ -18,7 +18,7 @@ const Cart: FC<CartProps> = (props) => {
 
     //redux logic
     const { deleteItem, clear, addItem } = cart.actions;
-    const { uniqueItems, prise, itemsCount } = useAppSelector((selector) => selector.cart);
+    const { uniqueItems, prise, itemsCount } = useAppSelector(cartSelector);
     const dispatch = useAppDispatch();
 
     const delItem = (item: IPizzaItem, delAll?: boolean) => {

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IPizzaItem } from '../../models/cartPizzaItem';
+import { IPizzaItem } from '../../models/PizzaItem';
 import isEqual from '../../utils/isEqual';
 import { RootState } from '../store';
 

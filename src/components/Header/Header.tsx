@@ -11,8 +11,6 @@ import { cartSelector } from '../../redux/Slices/cart';
 interface HeaderProps {}
 
 const Header: FunctionComponent<HeaderProps> = () => {
-    console.log('hi i am render');
-
     return (
         <div className={style.header}>
             <NavLink to="/" className={style.left_side}>

@@ -9,7 +9,7 @@ import clearIcon from '../../assets/img/icons/clear.svg';
 import arrowIcon from '../../assets/img/icons/arrow.svg';
 import { cart, cartSelector } from '../../redux/Slices/cart';
 import { useAppDispatch, useAppSelector } from '../../redux/redux';
-import { IPizzaItem } from '../../models/cartPizzaItem';
+import { IPizzaItem } from '../../models/PizzaItem';
 import EmptyСart from '../EmptyСart/EmptyСart';
 
 interface CartProps {}

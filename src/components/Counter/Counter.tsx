@@ -10,12 +10,12 @@ interface CounterProps {
 const Counter: FC<CounterProps> = (props) => {
     const { plusCallBack, minusCallBack, count } = props;
 
-    const minusCallBackWithProtection = () => {
+    const minusCallBackWithProtection: React.MouseEventHandler<HTMLButtonElement> = () => {
         if (count > 0) {
             minusCallBack();
         }
     };
-    const plusCallBackWithProtection = () => {
+    const plusCallBackWithProtection: React.MouseEventHandler<HTMLButtonElement> = () => {
         if (count < 99) {
             plusCallBack();
         }

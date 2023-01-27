@@ -1,10 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import pizzaListApi from '../../Api/pizzaList';
+import { IPizzaItem } from '../../models/PizzaItem';
 import { RootState } from '../store';
 
 export const fetchPizzas = createAsyncThunk(
     'pizzaList/fetchPizzas',
-    async (payload: { selectedCategory: number; sortProperty: string }) => {
+    async (payload: { selectedCategory: number; sortProperty: string }): Promise<IPizzaItem[]> => {
         const { selectedCategory, sortProperty } = payload;
         const data = await pizzaListApi.getPizzaList({ categoryId: selectedCategory, sortProperty: sortProperty });
 
@@ -12,7 +13,19 @@ export const fetchPizzas = createAsyncThunk(
     }
 );
 
-const initialState = {
+type sort = {
+    title: string;
+    sortProperty: 'rating' | 'tile' | 'prise' | '+prise';
+};
+
+interface pizzaListState {
+    categoryId: number;
+    sort: sort;
+    list: IPizzaItem[];
+    isLoading: boolean;
+}
+
+const initialState: pizzaListState = {
     categoryId: 0,
     sort: {
         title: 'Популярности',

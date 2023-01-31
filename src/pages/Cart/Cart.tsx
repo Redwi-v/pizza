@@ -7,10 +7,11 @@ import CartItem from '../../components/CartItem/CartItem';
 import CartIcon from '../../assets/img/icons/cart.svg';
 import clearIcon from '../../assets/img/icons/clear.svg';
 import arrowIcon from '../../assets/img/icons/arrow.svg';
-import { cart, cartSelector } from '../../redux/Slices/cart';
+import { cart, cartSelector } from '../../redux/Slices/cart/cart';
 import { useAppDispatch, useAppSelector } from '../../redux/redux';
 import { IPizzaItem } from '../../models/PizzaItem';
 import EmptyСart from '../EmptyСart/EmptyСart';
+import useStorage from '../../hooks/useStorage';
 
 interface CartProps {}
 const Cart: FC<CartProps> = (props) => {
@@ -20,6 +21,8 @@ const Cart: FC<CartProps> = (props) => {
     const { deleteItem, clear, addItem } = cart.actions;
     const { uniqueItems, prise, itemsCount } = useAppSelector(cartSelector);
     const dispatch = useAppDispatch();
+
+    console.log(uniqueItems);
 
     const delItem = (item: IPizzaItem, delAll?: boolean) => {
         dispatch(
@@ -32,6 +35,8 @@ const Cart: FC<CartProps> = (props) => {
     const clearAction = () => {
         dispatch(clear());
     };
+
+    // useStorage('cart', { prise, uniqueItems });
 
     if (itemsCount === 0) {
         return <EmptyСart />;

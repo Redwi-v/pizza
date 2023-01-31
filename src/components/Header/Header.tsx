@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import logo from '../../assets/img/logo.png';
 import cartIcon from '../../assets/img/icons/cart.svg';
 import { useAppSelector } from '../../redux/redux';
-import { cartSelector } from '../../redux/Slices/cart';
+import { cartSelector } from '../../redux/Slices/cart/cart';
 
 interface HeaderProps {}
 

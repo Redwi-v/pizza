@@ -11,6 +11,8 @@ const Main: FunctionComponent<MainProps> = (props) => {
     const { selectedCategory, setCategory, pizzaList, pizzaListIsLoading, sort, setFlagsFromString, addItem, items, delItem } =
         props;
 
+    React.useEffect(() => {}, [items]);
+
     return (
         <div className={style.main}>
             <div className={style.filters}>

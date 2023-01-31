@@ -1,10 +1,10 @@
 import Main from './Main';
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../redux/redux';
-import { pizzaList, pizzaListSelector } from '../../redux/Slices/pizzaList';
-import { fetchPizzas } from '../../redux/Slices/pizzaList';
+import { pizzaList, pizzaListSelector } from '../../redux/Slices/pizzaList/pizzaList';
+import { fetchPizzas } from '../../redux/Slices/pizzaList/pizzaListExtraReducers';
 import { useNavigate } from 'react-router-dom';
-import { cart, cartSelector } from '../../redux/Slices/cart';
+import { cart, cartSelector } from '../../redux/Slices/cart/cart';
 import { IPizzaItem } from '../../models/PizzaItem';
 interface MainContainerProps {}
 

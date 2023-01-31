@@ -7,7 +7,6 @@ import starIcon from '../../assets/img/icons/star.png';
 import Counter from '../Counter/Counter';
 import settingsData from './settingsData';
 import { IPizzaItem } from '../../models/PizzaItem';
-import { Link } from 'react-router-dom';
 
 //settings data
 const pizza_doughs = settingsData.pizza_doughs;
@@ -102,13 +101,11 @@ const PizzaItem: FC<PizzaItemProps> = (props) => {
 
     return (
         <div className={style.pizza_item}>
-            <Link to={`/pizza/${id}`}>
-                <div className={style.pizza_preview}>
-                    <img src={imageUrl} alt="pizza image" />
-                </div>
+            <div className={style.pizza_preview}>
+                <img src={imageUrl} alt="pizza image" />
+            </div>
 
-                <h2 className={style.name}>{name}</h2>
-            </Link>
+            <h2 className={style.name}>{name}</h2>
 
             <div className={style.rating}>
                 <img src={starIcon} alt="star icon" className={style.star} />

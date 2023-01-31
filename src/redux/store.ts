@@ -1,6 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import pizzaList from './Slices/pizzaList';
-import cart from './Slices/cart';
+import pizzaList from './Slices/pizzaList/pizzaList';
+import cart from './Slices/cart/cart';
 
 const reducers = combineReducers({
     pizzaList,

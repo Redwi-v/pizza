@@ -1,0 +1,72 @@
+$errColor : rgb(193, 33, 65);
+
+.form {
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px 40px;
+    max-width: 450px;
+
+    .custom_field {}
+
+    .field {
+        border: 2px solid #e9e9e9;
+        background: transparent;
+        border-radius: 15px;
+        padding: 7px 14px;
+        width: 100%;
+
+        &::placeholder {
+            color: #ffffffc9;
+        }
+
+        color: #efefef;
+
+
+        outline: none;
+    }
+
+    .error {
+        color: $errColor;
+        margin: 3px 0 0 5px;
+        font-size: 14px;
+    }
+
+    .err_field {
+        border-color: $errColor;
+        color: $errColor;
+
+        &::placeholder {
+            color: $errColor;
+
+        }
+    }
+
+}
+
+.card {
+    box-shadow: 0 0 10px #00000049;
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    .field {}
+
+    .middle_section {
+        display: flex;
+
+        gap: 30px;
+
+
+        .custom_field:last-child {
+            max-width: 100px;
+
+            &::placeholder {
+                text-align: center;
+            }
+        }
+    }
+}

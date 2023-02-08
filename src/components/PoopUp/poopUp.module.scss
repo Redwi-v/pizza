@@ -1,0 +1,51 @@
+.poopUp {
+    position: fixed;
+    display: none;
+    z-index: 100000;
+
+    &_placeholder {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+
+        display: flex;
+        justify-content: center;
+
+        background-color: rgba(0, 0, 0, 0.409);
+        overflow-y: auto;
+        padding-bottom: 45px;
+
+    }
+
+    &_content {
+        background: #444444;
+        height: fit-content;
+        margin-top: 40px;
+        border-radius: 20px;
+        padding: 15px;
+        color: #000;
+    }
+}
+
+.poopUp.isOpen {
+
+    display: block;
+    animation: poopUpAnimation .3s both;
+}
+
+@keyframes poopUpAnimation {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+
+    }
+}
+
+.noScroll {
+    overflow: hidden;
+}

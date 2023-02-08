@@ -13,11 +13,10 @@
   .pizza_list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     gap: 20px;
     row-gap: 45px;
     margin-top: 40px;
   }
-  .pizza {
-  }
+
+  .pizza {}
 }

@@ -13,6 +13,7 @@ const Main: FunctionComponent<MainProps> = (props) => {
 
     React.useEffect(() => {}, [items]);
 
+    // TODO: разбить на модули
     return (
         <div className={style.main}>
             <div className={style.filters}>

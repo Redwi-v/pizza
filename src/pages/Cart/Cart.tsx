@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-
 import style from './cart.module.scss';
 
 //images
@@ -11,7 +10,7 @@ import { cart, cartSelector } from '../../redux/Slices/cart/cart';
 import { useAppDispatch, useAppSelector } from '../../redux/redux';
 import { IPizzaItem } from '../../models/PizzaItem';
 import EmptyСart from '../EmptyСart/EmptyСart';
-import useStorage from '../../hooks/useStorage';
+import PayPoopUp from './PayPoopUp/PayPoopUp';
 
 interface CartProps {}
 const Cart: FC<CartProps> = (props) => {
@@ -22,7 +21,8 @@ const Cart: FC<CartProps> = (props) => {
     const { uniqueItems, prise, itemsCount } = useAppSelector(cartSelector);
     const dispatch = useAppDispatch();
 
-    console.log(uniqueItems);
+    //poopUp condition
+    const [isOpen, setCondition] = React.useState(false);
 
     const delItem = (item: IPizzaItem, delAll?: boolean) => {
         dispatch(
@@ -36,14 +36,14 @@ const Cart: FC<CartProps> = (props) => {
         dispatch(clear());
     };
 
-    // useStorage('cart', { prise, uniqueItems });
-
     if (itemsCount === 0) {
         return <EmptyСart />;
     }
 
+    // TODO: разбить на модули
     return (
         <>
+            <PayPoopUp isOpen={isOpen} setCondition={setCondition} />
             <div className={style.container}>
                 <div className={style.top}>
                     <h1 className={style.title}>
@@ -79,7 +79,9 @@ const Cart: FC<CartProps> = (props) => {
                         <img src={arrowIcon} alt="back" />
                         Вернуться назад
                     </button>
-                    <button className={style.pay_btn}>Оформить заказ</button>
+                    <button onClick={() => setCondition(true)} className={style.pay_btn}>
+                        Оформить заказ
+                    </button>
                 </div>
             </div>
         </>

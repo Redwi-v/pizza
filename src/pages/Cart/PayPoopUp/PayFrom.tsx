@@ -13,7 +13,7 @@ interface IPayFromValues {
     address: string;
 
     cardNumber: number | '';
-    term: number | '';
+    term: string;
     cardOwner: string;
     cvvCode: number | '';
 }
@@ -41,7 +41,7 @@ const PayForm: FC<PayFormProps> = (props) => {
 
     return (
         <Formik initialValues={initialValues} onSubmit={submitForm} validationSchema={payValidationScheme}>
-            {({ errors, touched, isValid, dirty }) => (
+            {({ errors, touched, isValid, dirty, values }) => (
                 <>
                     <Form className={style.form}>
                         <CustomField
@@ -84,12 +84,13 @@ const PayForm: FC<PayFormProps> = (props) => {
                             />
 
                             <div className={style.middle_section}>
-                                <CustomField
-                                    type="number"
+                                <TermField
+                                    type="string"
                                     placeholder="Expiry MM/YY"
                                     name="term"
                                     error={errors.term}
                                     touched={touched.term}
+                                    value={values.term}
                                 />
                                 <CustomField
                                     type="number"
@@ -135,6 +136,41 @@ const CustomField: FC<CustomFieldProps> = (props) => {
                 name={name}
                 placeholder={placeholder || ''}
                 type={type}
+            />
+            {error && touched ? <div className={style.error}>{error}</div> : null}
+        </div>
+    );
+};
+
+interface ITermField extends CustomFieldProps {
+    value: string;
+}
+
+const TermField: FC<ITermField> = (props) => {
+    const { error, touched, name, placeholder, type } = props;
+    let { value } = props;
+
+    if (value.length === 3) {
+        const arr = value.split('');
+        const thirdСharacter = arr[2];
+        if (thirdСharacter !== '/') {
+            arr[2] = '/';
+            arr[3] = thirdСharacter;
+        }
+        value = arr.join('');
+    }
+
+    value = value.slice(0, 5);
+    console.log(value);
+
+    return (
+        <div className={style.custom_field}>
+            <Field
+                className={`${style.field} ${error && touched && style.err_field}`}
+                name={name}
+                placeholder={placeholder || ''}
+                type={type}
+                value={value}
             />
             {error && touched ? <div className={style.error}>{error}</div> : null}
         </div>

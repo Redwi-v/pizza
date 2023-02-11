@@ -1,8 +1,8 @@
 import { Field, Formik, Form, FormikHelpers } from 'formik';
-import React, { FC } from 'react';
-import { Value } from 'sass';
+import React, { FC, useState } from 'react';
 import style from './payPoopUp.module.scss';
 import payValidationScheme from './validationScheme';
+import Select from '../../../components/_commons/Select/Select';
 
 interface PayFormProps {}
 
@@ -35,8 +35,13 @@ const PayForm: FC<PayFormProps> = (props) => {
     };
 
     const submitForm = (params: IPayFromValues, actions: FormikHelpers<IPayFromValues>) => {
+        console.log(params);
+
         actions.resetForm();
     };
+
+    //select controls
+    const [selectedOption, setOption] = useState('выберите город ');
 
     return (
         <Formik initialValues={initialValues} onSubmit={submitForm} validationSchema={payValidationScheme}>
@@ -64,7 +69,11 @@ const PayForm: FC<PayFormProps> = (props) => {
                             error={errors.phoneNumber}
                             touched={touched.phoneNumber}
                         />
-                        <CustomField type="text" placeholder="city" name="city" error={errors.city} touched={touched.city} />
+                        <Select
+                            selectedOption={selectedOption}
+                            setSelectedOption={setOption}
+                            options={['hello1', 'hello2', 'hello3', 'hello3', 'hello3', 'hello3', 'hello3']}
+                        />
                         <CustomField
                             type="text"
                             placeholder="address"

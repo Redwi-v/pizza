@@ -1,14 +1,14 @@
-$errColor : rgb(193, 33, 65);
+$errColor: rgb(193, 33, 65);
 
 .form {
-
     display: flex;
     flex-direction: column;
     gap: 15px;
     padding: 15px 40px;
     max-width: 450px;
 
-    .custom_field {}
+    .custom_field {
+    }
 
     .field {
         border: 2px solid #e9e9e9;
@@ -16,13 +16,13 @@ $errColor : rgb(193, 33, 65);
         border-radius: 15px;
         padding: 7px 14px;
         width: 100%;
+        outline: none;
 
         &::placeholder {
             color: #ffffffc9;
         }
 
         color: #efefef;
-
 
         outline: none;
     }
@@ -39,10 +39,8 @@ $errColor : rgb(193, 33, 65);
 
         &::placeholder {
             color: $errColor;
-
         }
     }
-
 }
 
 .card {
@@ -53,13 +51,13 @@ $errColor : rgb(193, 33, 65);
     flex-direction: column;
     gap: 15px;
 
-    .field {}
+    .field {
+    }
 
     .middle_section {
         display: flex;
 
         gap: 30px;
-
 
         .custom_field:last-child {
             max-width: 100px;

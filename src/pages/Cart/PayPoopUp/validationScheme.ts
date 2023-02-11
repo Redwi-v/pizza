@@ -37,7 +37,7 @@ const payValidationScheme = Yup.object().shape({
         .max(30, 'максимальное число символов 30')
         .required(requiredText),
 
-    cvvCode: Yup.number().max(3, 'cvv состоит из 3 цифр').min(3).required(requiredText),
+    cvvCode: Yup.number().min(3).required(requiredText),
 });
 
 export default payValidationScheme;

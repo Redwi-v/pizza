@@ -1,5 +1,6 @@
 import { Field, Formik, Form, FormikHelpers } from 'formik';
 import React, { FC } from 'react';
+import { Value } from 'sass';
 import style from './payPoopUp.module.scss';
 import payValidationScheme from './validationScheme';
 
@@ -34,8 +35,6 @@ const PayForm: FC<PayFormProps> = (props) => {
     };
 
     const submitForm = (params: IPayFromValues, actions: FormikHelpers<IPayFromValues>) => {
-        console.log(params);
-        console.log(actions);
         actions.resetForm();
     };
 
@@ -98,6 +97,8 @@ const PayForm: FC<PayFormProps> = (props) => {
                                     name="cvvCode"
                                     error={errors.cvvCode}
                                     touched={touched.cvvCode}
+                                    value={values.cvvCode}
+                                    max={3}
                                 />
                             </div>
                             <CustomField
@@ -124,10 +125,19 @@ interface CustomFieldProps {
     name: string;
     placeholder?: string;
     type: string;
+    max?: number;
+    value?: number | string;
 }
 
 const CustomField: FC<CustomFieldProps> = (props) => {
-    const { error, touched, name, placeholder, type } = props;
+    const { error, touched, name, placeholder, type, max } = props;
+
+    let { value } = props;
+
+    if (value && max) {
+        value = String(value).length > max ? Number(value.toString().slice(0, max)) : value;
+        console.log(value);
+    }
 
     return (
         <div className={style.custom_field}>
@@ -136,6 +146,7 @@ const CustomField: FC<CustomFieldProps> = (props) => {
                 name={name}
                 placeholder={placeholder || ''}
                 type={type}
+                value={value}
             />
             {error && touched ? <div className={style.error}>{error}</div> : null}
         </div>
@@ -161,7 +172,6 @@ const TermField: FC<ITermField> = (props) => {
     }
 
     value = value.slice(0, 5);
-    console.log(value);
 
     return (
         <div className={style.custom_field}>

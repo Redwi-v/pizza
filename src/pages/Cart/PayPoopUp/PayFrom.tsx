@@ -39,9 +39,6 @@ const PayForm: FC<PayFormProps> = (props) => {
     const submitForm = (params: IPayFromValues, actions: FormikHelpers<IPayFromValues>) => {
         console.log(params);
         actions.resetForm();
-        console.log(initialValues);
-
-        // actions.setValues(initialValues);
     };
 
     //select controlsя

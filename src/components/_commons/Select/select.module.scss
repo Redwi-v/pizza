@@ -10,13 +10,43 @@
     }
 
     .selected_option {
-        padding: 10px 15px;
+        position: relative;
+        input {
+            padding: 7px 14px;
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            padding-right: 40px;
+
+            &::placeholder {
+                color: #ffffffc9;
+            }
+        }
+    }
+
+    .notFound {
+        padding: 0 13px;
+    }
+
+    .openButton {
+        position: absolute;
+        right: 15px;
+        top: 3px;
+
+        background: none;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        font-size: 20px;
     }
 
     .select_list {
         overflow-y: auto;
         max-height: 200px;
         margin: 5px 3px 5px 3px;
+
         &::-webkit-scrollbar {
             width: 10px;
         }
@@ -36,13 +66,18 @@
 
     .select_list_wrapper {
         position: absolute;
-        top: 100%;
+        display: none;
+
+        top: 50px;
         left: 0;
         right: 0;
         margin: auto;
         background: #444;
         box-shadow: 0 0 20px #232323;
         overflow: hidden;
+    }
+    .select_list_wrapper.active {
+        display: block;
     }
 
     .option {

@@ -30,7 +30,9 @@ const CartItem: FC<CartItemProps> = (props) => {
                     </div>
                 </div>
             </div>
-            <Counter count={count} minusCallBack={() => delItem(item)} plusCallBack={addItem} />
+            <div className={style.counter}>
+                <Counter count={count} minusCallBack={() => delItem(item)} plusCallBack={addItem} />
+            </div>
             <h2 className={style.prise}>
                 {Number(prise) * count}
                 <span>₽</span>

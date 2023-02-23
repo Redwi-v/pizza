@@ -117,6 +117,7 @@ const cartReducers = {
         state.uniqueItems = [];
         state.prise = 0;
         state.itemsCount = 0;
+        setCartFromSlice(state);
     },
 };
 

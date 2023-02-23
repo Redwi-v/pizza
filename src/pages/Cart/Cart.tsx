@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/redux';
 import { IPizzaItem } from '../../models/PizzaItem';
 import EmptyСart from '../EmptyСart/EmptyСart';
 import PayPoopUp from './PayPoopUp/PayPoopUp';
+import { NavLink } from 'react-router-dom';
 
 interface CartProps {}
 const Cart: FC<CartProps> = (props) => {
@@ -36,54 +37,59 @@ const Cart: FC<CartProps> = (props) => {
         dispatch(clear());
     };
 
-    if (itemsCount === 0) {
-        return <EmptyСart />;
-    }
-
     // TODO: разбить на модули
     return (
         <>
             <PayPoopUp isOpen={isOpen} setCondition={setCondition} />
-            <div className={style.container}>
-                <div className={style.top}>
-                    <h1 className={style.title}>
-                        <img src={CartIcon} alt="cart" /> Корзина
-                    </h1>
-                    <button onClick={clearAction} className={style.clear}>
-                        <img src={clearIcon} alt="clear" />
-                        Очистить корзину
-                    </button>
-                </div>
-                <ul className={style.list}>
-                    {uniqueItems.map(([count, item], index) => {
-                        const uniqueKey = String(item.id) + item.doughType + item.size;
-
-                        return (
-                            <li key={uniqueKey}>
-                                <CartItem item={item} addItem={() => dispatch(addItem(item))} delItem={delItem} count={count} />
-                            </li>
-                        );
-                    })}
-                </ul>
-
-                <div className={style.general_information}>
-                    <div className={style.pizza_count}>
-                        Всего пицц: <span>{itemsCount} шт.</span>
+            {itemsCount ? (
+                <div className={style.container}>
+                    <div className={style.top}>
+                        <h1 className={style.title}>
+                            <img src={CartIcon} alt="cart" /> Корзина
+                        </h1>
+                        <button onClick={clearAction} className={style.clear}>
+                            <img src={clearIcon} alt="clear" />
+                            <span> Очистить корзину</span>
+                        </button>
                     </div>
-                    <div className={style.check}>
-                        Сумма заказа: <span>{prise} ₽</span>
+                    <ul className={style.list}>
+                        {uniqueItems.map(([count, item], index) => {
+                            const uniqueKey = String(item.id) + item.doughType + item.size;
+
+                            return (
+                                <li key={uniqueKey}>
+                                    <CartItem
+                                        item={item}
+                                        addItem={() => dispatch(addItem(item))}
+                                        delItem={delItem}
+                                        count={count}
+                                    />
+                                </li>
+                            );
+                        })}
+                    </ul>
+
+                    <div className={style.general_information}>
+                        <div className={style.pizza_count}>
+                            Всего пицц: <span>{itemsCount} шт.</span>
+                        </div>
+                        <div className={style.check}>
+                            Сумма заказа: <span>{prise} ₽</span>
+                        </div>
+                    </div>
+                    <div className={style.actions}>
+                        <NavLink to={'/'} className={style.back_btn}>
+                            <img src={arrowIcon} alt="back" />
+                            Вернуться назад
+                        </NavLink>
+                        <button onClick={() => setCondition(true)} className={style.pay_btn}>
+                            Оформить заказ
+                        </button>
                     </div>
                 </div>
-                <div className={style.actions}>
-                    <button className={style.back_btn}>
-                        <img src={arrowIcon} alt="back" />
-                        Вернуться назад
-                    </button>
-                    <button onClick={() => setCondition(true)} className={style.pay_btn}>
-                        Оформить заказ
-                    </button>
-                </div>
-            </div>
+            ) : (
+                <EmptyСart />
+            )}
         </>
     );
 };

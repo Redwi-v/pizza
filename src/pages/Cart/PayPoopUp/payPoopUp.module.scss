@@ -41,6 +41,23 @@ $errColor: rgb(193, 33, 65);
             color: $errColor;
         }
     }
+
+    .payButton {
+        background: rgb(94, 223, 94);
+        border: none;
+        height: 50px;
+        border-radius: 30px;
+        cursor: pointer;
+
+        span {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+        }
+    }
+    .payButton:disabled {
+        opacity: 0.6;
+    }
 }
 
 .card {
@@ -66,5 +83,11 @@ $errColor: rgb(193, 33, 65);
                 text-align: center;
             }
         }
+    }
+}
+
+@media (max-width: 506px) {
+    .form {
+        padding: 40px 0px;
     }
 }

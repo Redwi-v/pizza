@@ -17,9 +17,12 @@
         overflow-y: auto;
         padding-bottom: 45px;
 
+        padding: 5px;
     }
 
     &_content {
+        position: relative;
+
         background: #444444;
         height: fit-content;
         margin-top: 40px;
@@ -27,12 +30,22 @@
         padding: 15px;
         color: #000;
     }
+
+    .closeBtn {
+        position: absolute;
+        right: 5px;
+        background: none;
+        border: none;
+        font-size: 34px;
+        color: #e94040;
+        top: 5px;
+        cursor: pointer;
+    }
 }
 
 .poopUp.isOpen {
-
     display: block;
-    animation: poopUpAnimation .3s both;
+    animation: poopUpAnimation 0.3s both;
 }
 
 @keyframes poopUpAnimation {
@@ -42,7 +55,6 @@
 
     100% {
         opacity: 1;
-
     }
 }
 

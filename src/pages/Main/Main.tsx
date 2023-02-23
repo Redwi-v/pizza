@@ -11,8 +11,6 @@ const Main: FunctionComponent<MainProps> = (props) => {
     const { selectedCategory, setCategory, pizzaList, pizzaListIsLoading, sort, setFlagsFromString, addItem, items, delItem } =
         props;
 
-    React.useEffect(() => {}, [items]);
-
     // TODO: разбить на модули
     return (
         <div className={style.main}>

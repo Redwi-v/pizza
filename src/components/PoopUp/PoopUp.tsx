@@ -23,6 +23,9 @@ const PooUp: FC<PooUpProps> = (props) => {
         <div className={`${style.poopUp} ${isOpen && style.isOpen}`}>
             <div onClick={close} className={style.poopUp_placeholder}>
                 <div onClick={stopPropagation} className={style.poopUp_content}>
+                    <button onClick={close} className={style.closeBtn}>
+                        ◈
+                    </button>
                     {children}
                 </div>
             </div>

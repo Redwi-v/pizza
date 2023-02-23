@@ -1,69 +1,75 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 25px;
-
-  .left_side {
     display: flex;
-    align-items: center;
-  }
-  .right_side {
-  }
+    justify-content: space-between;
+    padding-top: 25px;
 
-  .logo {
-    width: 48px;
-    height: max-content;
-  }
-
-  .service {
-    margin-left: 10px;
-  }
-  .name {
-    text-transform: uppercase;
-    line-height: 30px;
-    color: #e94040;
-    font-weight: 800;
-    text-shadow: 1px 1px 33px #e9404073;
-  }
-  .subtitle {
-    line-height: normal;
-    font-size: 13px;
-    font-weight: 300;
-  }
-
-  .shopping_info {
-    display: flex;
-    position: relative;
-    align-items: center;
-    padding: 10px 20px;
-
-    button {
-      background: none;
-      border: none;
-      color: inherit;
-      padding: 0;
-      cursor: pointer;
+    .left_side {
+        display: flex;
+        align-items: center;
     }
-  }
-  .money {
-    position: relative;
-    padding-right: 10px !important;
-    margin-right: 10px;
-  }
-  .money::after {
-    content: '';
-    display: block;
-    position: absolute;
-    width: 1px;
-    height: 80%;
-    top: 2px;
-    right: 0;
-    background-color: rgba(255, 255, 255, 0.494);
-  }
+    .right_side {
+    }
 
-  .cart {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
+    .logo {
+        width: 48px;
+        height: max-content;
+    }
+
+    .service {
+        margin-left: 10px;
+    }
+    .name {
+        text-transform: uppercase;
+        line-height: 30px;
+        color: #e94040;
+        font-weight: 800;
+        text-shadow: 1px 1px 33px #e9404073;
+    }
+    .subtitle {
+        line-height: normal;
+        font-size: 13px;
+        font-weight: 300;
+    }
+
+    .shopping_info {
+        display: flex;
+        position: relative;
+        align-items: center;
+        padding: 10px 20px;
+
+        button {
+            background: none;
+            border: none;
+            color: inherit;
+            padding: 0;
+            cursor: pointer;
+        }
+    }
+    .money {
+        position: relative;
+        padding-right: 10px !important;
+        margin-right: 10px;
+    }
+    .money::after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 1px;
+        height: 80%;
+        top: 2px;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.494);
+    }
+
+    .cart {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+}
+
+@media (max-width: 407px) {
+    .logo {
+        display: none;
+    }
 }

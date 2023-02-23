@@ -5,8 +5,12 @@ import payValidationScheme, { cities } from './validationScheme';
 import Select from '../../../components/_commons/Select/Select';
 import CustomFieldProps from '../../../components/_commons/CustomField/customFieldProps';
 import CustomField from '../../../components/_commons/CustomField/CustomField';
+import { cart, cartSelector } from '../../../redux/Slices/cart/cart';
+import { useAppDispatch, useAppSelector } from '../../../redux/redux';
 
-interface PayFormProps {}
+interface PayFormProps {
+    setCondition: (condition: boolean) => void;
+}
 
 interface IPayFromValues {
     firstName: string;
@@ -22,7 +26,11 @@ interface IPayFromValues {
 }
 
 const PayForm: FC<PayFormProps> = (props) => {
-    const {} = props;
+    const { setCondition } = props;
+
+    const { prise } = useAppSelector(cartSelector);
+    const { clear } = cart.actions;
+    const dispatch = useAppDispatch();
 
     const initialValues: IPayFromValues = {
         firstName: '',
@@ -37,11 +45,13 @@ const PayForm: FC<PayFormProps> = (props) => {
     };
 
     const submitForm = (params: IPayFromValues, actions: FormikHelpers<IPayFromValues>) => {
+        setCondition(false);
         console.log(params);
         actions.resetForm();
+        dispatch(clear());
     };
 
-    //select controlsя
+    //select controls
     return (
         <Formik initialValues={initialValues} onSubmit={submitForm} validationSchema={payValidationScheme}>
             {({ errors, touched, isValid, dirty, values, setFieldValue }) => {
@@ -50,7 +60,7 @@ const PayForm: FC<PayFormProps> = (props) => {
                         <Form className={style.form}>
                             <CustomField
                                 type="text"
-                                placeholder="firstName"
+                                placeholder="Имя"
                                 name="firstName"
                                 error={errors.firstName}
                                 touched={touched.firstName}
@@ -58,7 +68,7 @@ const PayForm: FC<PayFormProps> = (props) => {
                             />
                             <CustomField
                                 type="text"
-                                placeholder="lastName"
+                                placeholder="Фамилия"
                                 name="lastName"
                                 error={errors.lastName}
                                 touched={touched.lastName}
@@ -66,7 +76,7 @@ const PayForm: FC<PayFormProps> = (props) => {
                             />
                             <CustomField
                                 type="number"
-                                placeholder="phoneNumber"
+                                placeholder="Номер телефона"
                                 name="phoneNumber"
                                 error={errors.phoneNumber}
                                 touched={touched.phoneNumber}
@@ -83,7 +93,7 @@ const PayForm: FC<PayFormProps> = (props) => {
                             />
                             <CustomField
                                 type="text"
-                                placeholder="address"
+                                placeholder="Адрес"
                                 name="address"
                                 error={errors.address}
                                 touched={touched.address}
@@ -93,7 +103,7 @@ const PayForm: FC<PayFormProps> = (props) => {
                             <div className={style.card}>
                                 <CustomField
                                     type="number"
-                                    placeholder="cardNumber"
+                                    placeholder="Номер карты"
                                     name="cardNumber"
                                     error={errors.cardNumber}
                                     touched={touched.cardNumber}
@@ -103,7 +113,7 @@ const PayForm: FC<PayFormProps> = (props) => {
                                 <div className={style.middle_section}>
                                     <TermField
                                         type="string"
-                                        placeholder="Expiry MM/YY"
+                                        placeholder="Срок действия MM/YY"
                                         name="term"
                                         error={errors.term}
                                         touched={touched.term}
@@ -121,15 +131,15 @@ const PayForm: FC<PayFormProps> = (props) => {
                                 </div>
                                 <CustomField
                                     type="text"
-                                    placeholder="cardOwner"
+                                    placeholder="Владелец карты"
                                     name="cardOwner"
                                     error={errors.cardOwner}
                                     touched={touched.cardOwner}
                                     value={values.cardOwner}
                                 />
                             </div>
-                            <button disabled={!(isValid && dirty)} type="submit">
-                                Submit
+                            <button className={style.payButton} disabled={!(isValid && dirty)} type="submit">
+                                <span>Оплатить: {prise}р</span>
                             </button>
                         </Form>
                     </>

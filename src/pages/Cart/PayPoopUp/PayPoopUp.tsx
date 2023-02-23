@@ -10,12 +10,9 @@ interface PayPoopUpProps {
 const PayPoopUp: FC<PayPoopUpProps> = (props) => {
     const { isOpen, setCondition } = props;
 
-    //redux logic
-    const { clear } = cart.actions;
-
     return (
         <PooUp isOpen={isOpen} setCondition={setCondition}>
-            <PayForm />
+            <PayForm setCondition={setCondition} />
         </PooUp>
     );
 };
